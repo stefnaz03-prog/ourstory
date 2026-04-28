@@ -10,7 +10,6 @@
 html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:'Lato',sans-serif;}
 
 #sc-wrap{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:0;left:0;overflow:hidden;}
-#yt-wrap{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:0;left:0;overflow:hidden;}
 
 .slide{
   position:fixed;inset:0;opacity:0;transition:opacity 1.2s ease;
@@ -42,10 +41,11 @@ html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:
 
 /* CONCERT REVEAL SLIDE */
 .concert-slide{
-  justify-content:flex-start;
+  justify-content:center;
+  align-items:center;
   overflow-y:auto;
   overflow-x:hidden;
-  padding:60px 20px 100px;
+  padding:70px 20px 90px;
   position:relative;
   -webkit-overflow-scrolling:touch;
 }
@@ -116,7 +116,6 @@ html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:
 .ticket-notch-left{left:-11px;}
 .ticket-notch-right{right:-11px;}
 
-/* decorative stars */
 .stars{display:flex;gap:5px;margin-top:3px;}
 .star{color:#c9a96e;font-size:9px;}
 
@@ -186,15 +185,13 @@ html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:
 </head>
 <body>
 
-<div id="yt-wrap">
-  <iframe id="yt-player" width="1" height="1"
-    src="https://www.youtube.com/embed/oBSfSdXMzQw?enablejsapi=1&autoplay=0&controls=0&loop=1&playlist=oBSfSdXMzQw"
-    allow="autoplay"
-    frameborder="0">
+<div id="sc-wrap" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:0;left:0;overflow:hidden;">
+  <iframe id="sc-player" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/morgan-wallen/spin-you-around-1-24&color=%23c9a96e&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
   </iframe>
 </div>
 
-<div id="play-prompt" onclick="startShow()">
+<div id="play-prompt">
   <div class="play-btn">▶</div>
   <h2>Happy Birthday ♥</h2>
   <p>Tap to begin</p>
@@ -290,16 +287,14 @@ html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:
   <button class="nav-btn" onclick="go(cur+1)">&#8594;</button>
 </div>
 
-<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
 const total=5;let cur=0;let timer;let musicOn=true;
-let ytPlayer;
+let scWidget;
 
-function onYouTubeIframeAPIReady(){
-  ytPlayer=new YT.Player('yt-player',{
-    events:{onReady:function(){}}
-  });
-}
+window.addEventListener('load',function(){
+  scWidget=SC.Widget(document.getElementById('sc-player'));
+});
 
 const dotsEl=document.getElementById('dots');
 for(let i=0;i<total;i++){
@@ -325,20 +320,20 @@ function startShow(){
   started=true;
   document.getElementById('play-prompt').style.display='none';
   document.getElementById('slide-0').classList.add('active');
-  setTimeout(function(){
-    if(ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
-  },300);
+  try{ scWidget.play(); }catch(e){}
+  setTimeout(function(){ try{ scWidget.play(); }catch(e){} },500);
+  setTimeout(function(){ try{ scWidget.play(); }catch(e){} },1200);
   timer=setInterval(()=>go(cur+1),7000);
 }
 
-const prompt=document.getElementById('play-prompt');
-prompt.addEventListener('click',startShow);
-prompt.addEventListener('touchend',function(e){e.preventDefault();startShow();});
+const promptEl=document.getElementById('play-prompt');
+promptEl.addEventListener('click',startShow);
+promptEl.addEventListener('touchend',function(e){e.preventDefault();startShow();});
 
 function toggleMusic(){
-  if(!ytPlayer)return;
-  if(musicOn){ytPlayer.pauseVideo();document.getElementById('bars').classList.add('paused');}
-  else{ytPlayer.playVideo();document.getElementById('bars').classList.remove('paused');}
+  if(!scWidget)return;
+  if(musicOn){scWidget.pause();document.getElementById('bars').classList.add('paused');}
+  else{scWidget.play();document.getElementById('bars').classList.remove('paused');}
   musicOn=!musicOn;
 }
 </script>
