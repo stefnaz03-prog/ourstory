@@ -10,7 +10,7 @@
 html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:'Lato',sans-serif;}
 
 #sc-wrap{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:0;left:0;overflow:hidden;}
-#bg-audio{display:none;}
+#yt-wrap{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:0;left:0;overflow:hidden;}
 
 .slide{
   position:fixed;inset:0;opacity:0;transition:opacity 1.2s ease;
@@ -42,13 +42,17 @@ html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:
 
 /* CONCERT REVEAL SLIDE */
 .concert-slide{
-  justify-content:center;
-  padding:40px 40px 80px;
+  justify-content:flex-start;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:60px 20px 100px;
   position:relative;
+  -webkit-overflow-scrolling:touch;
 }
 .concert-slide::before{
-  content:'';position:absolute;inset:0;
+  content:'';position:fixed;inset:0;
   background:radial-gradient(ellipse at center,rgba(180,120,60,0.12) 0%,transparent 65%);
+  pointer-events:none;
 }
 .concert-slide>*{position:relative;z-index:1;}
 
@@ -56,74 +60,74 @@ html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:
   background:#13080a;
   border:1.5px solid rgba(201,169,110,0.4);
   border-radius:16px;
-  max-width:560px;
+  max-width:480px;
   width:100%;
   overflow:hidden;
   box-shadow:0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,169,110,0.1);
   position:relative;
+  margin:0 auto;
 }
 
 .ticket-top{
-  padding:32px 36px 24px;
+  padding:22px 24px 18px;
   border-bottom:1px dashed rgba(201,169,110,0.25);
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:5px;
 }
 
 .ticket-eyebrow{
-  font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#c9a96e;
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#c9a96e;
 }
 
 .ticket-artist{
   font-family:'Playfair Display',serif;
-  font-size:clamp(32px,6vw,52px);
+  font-size:clamp(28px,8vw,48px);
   color:#fff;
   line-height:1.05;
   font-weight:700;
 }
 
 .ticket-tour{
-  font-size:13px;letter-spacing:3px;text-transform:uppercase;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
   color:rgba(255,255,255,0.4);
-  margin-top:4px;
+  margin-top:2px;
 }
 
 .ticket-bottom{
-  padding:24px 36px 28px;
+  padding:16px 24px 20px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:20px;
+  gap:14px;
 }
 
 .ticket-field{}
-.ticket-field-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:5px;}
-.ticket-field-value{font-size:16px;color:#fff;font-weight:400;}
-.ticket-field-value.gold{color:#c9a96e;font-family:'Playfair Display',serif;font-style:italic;font-size:18px;}
+.ticket-field-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:4px;}
+.ticket-field-value{font-size:14px;color:#fff;font-weight:400;}
+.ticket-field-value.gold{color:#c9a96e;font-family:'Playfair Display',serif;font-style:italic;font-size:16px;}
 
 .ticket-notch-left,.ticket-notch-right{
   position:absolute;
-  width:24px;height:24px;border-radius:50%;
+  width:20px;height:20px;border-radius:50%;
   background:#0d0505;
   top:50%;transform:translateY(-50%);
   border:1.5px solid rgba(201,169,110,0.4);
 }
-.ticket-notch-left{left:-13px;}
-.ticket-notch-right{right:-13px;}
+.ticket-notch-left{left:-11px;}
+.ticket-notch-right{right:-11px;}
 
 /* decorative stars */
-.stars{
-  display:flex;gap:6px;margin-top:4px;
-}
-.star{color:#c9a96e;font-size:10px;}
+.stars{display:flex;gap:5px;margin-top:3px;}
+.star{color:#c9a96e;font-size:9px;}
 
 .concert-message{
-  margin-top:28px;
+  margin-top:20px;
   text-align:center;
+  padding:0 10px;
 }
 .concert-message p{
   font-family:'Playfair Display',serif;
-  font-size:clamp(14px,2vw,19px);
+  font-size:clamp(14px,3.5vw,19px);
   color:rgba(255,255,255,0.7);
   font-style:italic;
   line-height:1.8;
@@ -182,9 +186,11 @@ html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:
 </head>
 <body>
 
-<div id="sc-wrap">
-  <iframe id="sc-player" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/morgan-wallen/spin-you-around-1-24&color=%23c9a96e&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+<div id="yt-wrap">
+  <iframe id="yt-player" width="1" height="1"
+    src="https://www.youtube.com/embed/oBSfSdXMzQw?enablejsapi=1&autoplay=0&controls=0&loop=1&playlist=oBSfSdXMzQw"
+    allow="autoplay"
+    frameborder="0">
   </iframe>
 </div>
 
@@ -284,14 +290,16 @@ html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:
   <button class="nav-btn" onclick="go(cur+1)">&#8594;</button>
 </div>
 
-<script src="https://w.soundcloud.com/player/api.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
 const total=5;let cur=0;let timer;let musicOn=true;
-let scWidget;
+let ytPlayer;
 
-window.addEventListener('load',function(){
-  scWidget=SC.Widget(document.getElementById('sc-player'));
-});
+function onYouTubeIframeAPIReady(){
+  ytPlayer=new YT.Player('yt-player',{
+    events:{onReady:function(){}}
+  });
+}
 
 const dotsEl=document.getElementById('dots');
 for(let i=0;i<total;i++){
@@ -318,9 +326,7 @@ function startShow(){
   document.getElementById('play-prompt').style.display='none';
   document.getElementById('slide-0').classList.add('active');
   setTimeout(function(){
-    if(scWidget){
-      scWidget.play();
-    }
+    if(ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
   },300);
   timer=setInterval(()=>go(cur+1),7000);
 }
@@ -330,9 +336,9 @@ prompt.addEventListener('click',startShow);
 prompt.addEventListener('touchend',function(e){e.preventDefault();startShow();});
 
 function toggleMusic(){
-  if(!scWidget)return;
-  if(musicOn){scWidget.pause();document.getElementById('bars').classList.add('paused');}
-  else{scWidget.play();document.getElementById('bars').classList.remove('paused');}
+  if(!ytPlayer)return;
+  if(musicOn){ytPlayer.pauseVideo();document.getElementById('bars').classList.add('paused');}
+  else{ytPlayer.playVideo();document.getElementById('bars').classList.remove('paused');}
   musicOn=!musicOn;
 }
 </script>
