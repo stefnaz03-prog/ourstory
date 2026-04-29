@@ -63,4 +63,154 @@ html,body{width:100%;height:100%;background:#0d0505;overflow:hidden;font-family:
 .dots{display:flex;gap:8px;align-items:center;}
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;border:none;padding:0;transition:all .3s;}
 .dot.active{background:#c9a96e;width:20px;border-radius:3px;}
-#play-prompt{position:fixed;inset:0;z-index:300;background:#0d0505;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;cursor:pointer;-webkit-tap-h
+#play-prompt{position:fixed;inset:0;z-index:300;background:#0d0505;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;}
+#play-prompt h2{font-family:'Playfair Display',serif;color:#fff;font-size:32px;text-align:center;padding:0 20px;}
+#play-prompt p{color:#c9a96e;font-size:13px;letter-spacing:4px;text-transform:uppercase;}
+.play-btn{width:90px;height:90px;border-radius:50%;background:rgba(201,169,110,0.15);border:2px solid #c9a96e;display:flex;align-items:center;justify-content:center;font-size:32px;color:#c9a96e;animation:pulse 1.8s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,0.4);}50%{box-shadow:0 0 0 18px rgba(201,169,110,0);}}
+</style>
+</head>
+<body>
+<div id="sc-wrap" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;top:0;left:0;overflow:hidden;">
+  <iframe id="sc-player" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/morgan-wallen/spin-you-around-1-24&color=%23c9a96e&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+  </iframe>
+</div>
+<div id="play-prompt">
+  <div class="play-btn">▶</div>
+  <h2>Happy Birthday ♥</h2>
+  <p>Tap to begin</p>
+</div>
+<div class="music-bar" onclick="toggleMusic()">
+  <div class="bars" id="bars"><span></span><span></span><span></span><span></span></div>
+  <span class="music-label">Spin You Around — Morgan Wallen</span>
+</div>
+<div class="slide text-slide" id="slide-0">
+  <p class="label">Happy Birthday</p>
+  <h1>To the one who makes<br>everything <em>better</em></h1>
+  <p class="lyric">"Home was a dream, one that I'd never seen, 'til you came along..."</p>
+</div>
+<div class="slide photo-slide" id="slide-1">
+  <div class="photos-row">
+    <div class="photo-card"><img src="p1.jpg" alt=""></div>
+    <div class="photo-card"><img src="p2.jpg" alt=""></div>
+    <div class="photo-card"><img src="p3.jpg" alt=""></div>
+  </div>
+  <div class="caption-bar">
+    <span class="cap-main">The time it all started</span>
+    <span class="cap-song">Spin You Around · Morgan Wallen</span>
+  </div>
+</div>
+<div class="slide photo-slide" id="slide-2">
+  <div class="photos-row">
+    <div class="photo-card wide"><img src="p4.jpg" alt=""></div>
+    <div class="photo-card wide"><img src="p5.jpg" alt=""></div>
+  </div>
+  <div class="caption-bar">
+    <span class="cap-main">My favorite trips are when you're by my side</span>
+    <span class="cap-song">Spin You Around · Morgan Wallen</span>
+  </div>
+</div>
+<div class="slide photo-slide" id="slide-3">
+  <div class="photos-row">
+    <div class="photo-card wide"><img src="p6.jpg" alt=""></div>
+    <div class="photo-card wide"><img src="p7.jpg" alt=""></div>
+  </div>
+  <div class="caption-bar">
+    <span class="cap-main">Here's to a lifetime of more memories</span>
+    <span class="cap-song">Spin You Around · Morgan Wallen</span>
+  </div>
+</div>
+<div class="slide text-slide" id="slide-4">
+  <h1>Daniella, you mean<br>the world <em>to me.</em></h1>
+</div>
+<div class="slide text-slide" id="slide-5">
+  <p class="label">One more thing</p>
+  <h1>Let's make another<br>memory <em>together</em></h1>
+</div>
+<div class="slide concert-slide" id="slide-6">
+  <div class="ticket">
+    <div class="ticket-notch-left"></div>
+    <div class="ticket-notch-right"></div>
+    <div class="ticket-top">
+      <span class="ticket-eyebrow">Now let's make another memory</span>
+      <div class="ticket-artist">Morgan<br>Wallen</div>
+      <div class="ticket-tour">Still The Problem Tour 2026</div>
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+    </div>
+    <div class="ticket-bottom">
+      <div class="ticket-field">
+        <div class="ticket-field-label">Date</div>
+        <div class="ticket-field-value gold">Saturday, June 27th</div>
+      </div>
+      <div class="ticket-field">
+        <div class="ticket-field-label">Year</div>
+        <div class="ticket-field-value gold">2026</div>
+      </div>
+      <div class="ticket-field">
+        <div class="ticket-field-label">Doors open</div>
+        <div class="ticket-field-value">5:30 PM</div>
+      </div>
+      <div class="ticket-field">
+        <div class="ticket-field-label">Venue</div>
+        <div class="ticket-field-value">Clemson Memorial Stadium</div>
+      </div>
+    </div>
+  </div>
+  <div class="concert-message">
+    <p>Happy Birthday, baby — <em>you & me, front row to forever.</em></p>
+  </div>
+</div>
+<div class="nav-area">
+  <button class="nav-btn" onclick="go(cur-1)">&#8592;</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" onclick="go(cur+1)">&#8594;</button>
+</div>
+<script>
+const total=7;let cur=0;let timer;let musicOn=true;
+let scWidget=null;
+function initSC(){
+  if(typeof SC==='undefined'){setTimeout(initSC,200);return;}
+  scWidget=SC.Widget(document.getElementById('sc-player'));
+}
+window.addEventListener('load',initSC);
+const dotsEl=document.getElementById('dots');
+for(let i=0;i<total;i++){
+  const d=document.createElement('button');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>go(i);
+  dotsEl.appendChild(d);
+}
+function go(n){
+  document.getElementById('slide-'+cur).classList.remove('active');
+  document.querySelectorAll('.dot')[cur].classList.remove('active');
+  cur=(n+total)%total;
+  document.getElementById('slide-'+cur).classList.add('active');
+  document.querySelectorAll('.dot')[cur].classList.add('active');
+  clearInterval(timer);
+  const duration=(cur===4||cur===5)?5000:10000;
+  timer=setInterval(()=>go(cur+1),duration);
+}
+let started=false;
+function startShow(){
+  if(started)return;
+  started=true;
+  document.getElementById('play-prompt').style.display='none';
+  document.getElementById('slide-0').classList.add('active');
+  try{if(scWidget)scWidget.play();}catch(e){}
+  setTimeout(function(){try{if(scWidget)scWidget.play();}catch(e){}},600);
+  setTimeout(function(){try{if(scWidget)scWidget.play();}catch(e){}},1400);
+  timer=setInterval(()=>go(cur+1),10000);
+}
+const promptEl=document.getElementById('play-prompt');
+promptEl.addEventListener('click',startShow);
+promptEl.addEventListener('touchend',function(e){e.preventDefault();startShow();});
+function toggleMusic(){
+  if(!scWidget)return;
+  if(musicOn){scWidget.pause();document.getElementById('bars').classList.add('paused');}
+  else{scWidget.play();document.getElementById('bars').classList.remove('paused');}
+  musicOn=!musicOn;
+}
+</script>
+</body>
+</html>
