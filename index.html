@@ -188,7 +188,7 @@ function go(n){
   document.getElementById('slide-'+cur).classList.add('active');
   document.querySelectorAll('.dot')[cur].classList.add('active');
   clearInterval(timer);
-  const duration=(cur===4||cur===5)?5000:10000;
+  const duration=(cur===4||cur===5)?5000:(cur===6)?30000:10000;
   timer=setInterval(()=>go(cur+1),duration);
 }
 let started=false;
